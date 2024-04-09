@@ -1,0 +1,48 @@
+                         <!--INÍCIO   Animações encadeadas EX(3 itens em uma DIV)   INÍCIO-->
+
+no topo do arquivo > import { useLayoutEffect, useRef } from 'react'    <!--importar a biblioteca React-->
+                     import { gsap } from 'gsap'                        <!--importar a biblioteca GSAP-->
+                     import { ScrollTrigger } from 'gsap/ScrollTrigger' <!--importar a biblioteca ScrollTrigger-->
+
+dentro da função da página > const element = useRef()                   <!--criar uma variável para o elemento-->
+                             const timeline = useRef()                  <!--criar uma variável para a timeline-->
+
+                             useLayoutEffect(() => {                   <!--definir a hook-->
+                             gsap.registerPlugin(ScrollTrigger)        <!--definir o tipo de animação-->
+                             const ctx = gsap.context(() => {          <!--definir função anonima-->
+                                timeline.current = gsap.timeline({     <!--definir a timeline-->
+                                    scrollTrigger:{".classe",          <!--selecinar a classe da div a ser animada-->
+                                    scrub: true,                       <!--faz a animação enquanto rola o scroll-->
+                                    markers: true                      <!--Apenas para mostrar os marcadores start e end-->
+                                }
+                              })
+ <!--1ª animação da div-->     .fromTo("#id-1", {                          <!--Tipo de animação definindo a classe ou ID e parametros-->    
+                                  opacity: 0,                           <!--mudar a opacidade min:0 max:1-->
+                                  y: 160,                               <!--mover para a posição inicial-->
+                              }, {
+                                opacity: 1,                             <!--mudar a opacidade min:0 max:1-->
+                                y: 0                                    <!--mover para a origem-->
+                              })
+ <!--2ª animação da div-->     .fromTo("#id-2", {                          <!--Tipo de animação definindo a classe ou ID e parametros-->    
+                                  opacity: 0,                           <!--mudar a opacidade min:0 max:1-->
+                                  y: 160,                               <!--mover para a posição inicial-->
+                              }, {
+                                opacity: 1,                             <!--mudar a opacidade min:0 max:1-->
+                                y: 0                                    <!--mover para a origem-->
+                              })
+<!--2ª animação da div-->     .fromTo("#id-2", {                          <!--Tipo de animação definindo a classe ou ID e parametros-->    
+                                    opacity: 0,                           <!--mudar a opacidade min:0 max:1-->
+                                    y: 160,                               <!--mover para a posição inicial-->
+                              }, {
+                                  opacity: 1,                             <!--mudar a opacidade min:0 max:1-->
+                                  y: 0                                    <!--mover para a origem-->
+                              })
+                             }, element)                
+
+
+                             return () => {
+                                gsap.killTweensOf(".classe")              <!--limpar a animação ao sair da página-->
+                             }
+                            }, [])
+
+                         <!--FIM   Animações encadeadas EX(3 itens em uma DIV)   FIM-->

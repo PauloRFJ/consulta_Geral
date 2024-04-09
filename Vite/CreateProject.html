@@ -1,0 +1,30 @@
+<!-- CREATE REACT PROJECT WITH VITE -->
+
+no terminal > 
+    1 =>   npm create vite@latest   <!-- criar o projeto -->
+    2 =>   cd <nome do projeto>     <!-- acessar pasta do projeto -->
+    3 =>   npm i                    <!-- instalar as dependências -->
+    4 =>   npm run dev              <!-- iniciar o projeto -->
+
+
+<!-- EXEMPLO opcional para de limpeza dos arquivos -->
+
+Excluir arquivos > 
+    1- README.md
+    2- eslint.cjs
+    3- linha do link Fa-icon Vite.svg (Dentro do index.html)
+    4- pasta assets
+    5- App.css         <!-- remover conteúdo caso use CSS ou apagar arquivo caso use TailwindCSS -->  
+    6- index.css       <!-- remover conteúdo -->
+    7- import do index.css (Dentro do main.jsx)   <!-- Caso use TailwindCSS -->
+    8- Todos os imports do App.jsx
+    9- limpar return do App.jsx
+    10- realocar o export default para junto da função no App.jsx   <!-- opcional1 -->
+    11- colocar { App } no import do arquivo main.jsx               <!-- opcional2 caso tenha feito o opcional1 -->
+
+<!-- Implantar projeto na plataforma Netlify -->
+
+no terminal > 1º =>   criar uma conta no Netlify linkada ao GitHub
+              2º =>   npm install -g netlify-cli   <!-- instalar o Netlify -->
+              3º =>   netlify init <nome do projeto>   <!-- criar o Netlify Project -->
+              4º =>   netlify deploy                <!-- publicar o Netlify Project -->

@@ -1,0 +1,31 @@
+             <!--INÍCIO    ex de uma posição para a origem GSAP.TO do ScrollTrigger   INÍCIO-->
+
+no topo do arquivo > import { useLayoutEffect } from 'react'            <!--importar a biblioteca React-->
+                     import { gsap } from 'gsap'                        <!--importar a biblioteca GSAP-->
+                     import { ScrollTrigger } from 'gsap/ScrollTrigger' <!--importar a biblioteca ScrollTrigger-->
+
+dentro da função da página > useLayoutEffect(() => {         <!--definir a hook-->
+                             gsap.registerPlugin(ScrollTrigger)   <!--definir o tipo de animação-->
+                             gsap.to(".classe", {          <!--definir a forma de animar To/ From/ FromTo-->
+                               x: 0,                     <!--mover para a origem-->
+                               opacity: 1,               <!--mudar a opacidade min:0 max:1-->
+                               rotate: "0deg",           <!--rotacionar para a origem-->
+                               scrollTrigger: {          <!--definir a animação-->
+                                  markers: true,        <!--Apenas para mostrar os marcadores start e end-->
+                                  trigger: ".classe",   <!--selecinar a classe da div a ser animada -->
+                                  start: "top 400px",   <!--define o ponto inicial da animação-->
+                                  end: "bottom 200px",  <!--define o ponto final da animação-->
+                                  scrub: true,          <!--faz a animação enquanto rola o scroll-->
+                                 }
+                               })
+                              return () => {
+                             gsap.killTweensOf(".classe") <!--limpar a animação ao sair da página-->
+                                }
+                              }, [])
+
+dentro do CSS >          .classe {
+                             transform: translateX(-700px) rotate(180deg); <!--Define a posição que começa em x e rotaciona-->
+                             opacity: 0;                                   <!--Define a opacidade min:0 max:1-->
+                            }
+
+                  <!--FIM   ex de uma posição para a origem GSAP.TO do ScrollTrigger    FIM-->
