@@ -26,14 +26,20 @@ Exemplo => Pages > Contact.jsx
 
                                     Importar páginas dentro do arquivo main.jsx >
 
+import { App } from './App.jsx'
 import { Home } from './Pages/Home.jsx'
 import { About } from './Pages/About.jsx'
 import { Contact } from './Pages/Contact.jsx'
        
 
-                            Configurar Browser router dentro do arquivo main.jsx >
+                            Configurar Browser router dentro do arquivo routers.jsx >
                                  
-const routers = createBrowserRouter([
+const routers = createBrowserRouter([          <!-- criar o router  -->
+{
+path: "/",                                     <!-- criar a primeira rota -->
+element: <App/>,                               <!-- criar o componente -->
+errorElement: <Error/>,                        <!-- criar o componente de erro -->
+children: [                                    <!-- criar as rotas filhas -->
 {
 path: "/",
 element: <Home/>
@@ -45,6 +51,8 @@ element: <About/>
 {
 path: "/contact",
 element: <Contact/>
+}
+]
 }
 ])
 
