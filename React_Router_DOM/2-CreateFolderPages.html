@@ -1,0 +1,20 @@
+                                  Criar pasta Pages dentro do .src >
+Exemplo => Pages/Home.jsx
+           Pages/About.jsx
+           Pages/Contact.jsx
+                         
+
+                                  Dentro delas, montar o conteúdo >
+
+import Navbar from '../components/Navbar.jsx'
+import Footer from '../components/Footer.jsx'                                  
+
+function Home() {
+  return (
+    <Navbar />               <!-- Componente armazenado na pasta de componentes -->
+      <Outlet />             <!-- Elemento pai que carrega o array de rotas definido no primeiro path --> 
+    <Footer />               <!-- Componente armazenado na pasta de componentes -->
+  );
+}
+
+export default Home;

@@ -1,0 +1,9 @@
+                      Configurar router provider dentro do arquivo main.jsx >
+
+import { RouterProvider } from 'react-router-dom'
+import { routers } from './routers.jsx'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+<RouterProvider router={routers}>
+</RouterProvider>
+)

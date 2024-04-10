@@ -1,0 +1,13 @@
+                          Criando links de navegação dentro de um componente Navbar >
+
+import { Link } from 'react-router-dom'                  <!-- importar o link -->
+
+function Navbar() {
+    return(
+        <nav>
+          <Link to="/">Home</Link>                       
+          <Link to="/about">About</Link>                 <!-- criar os links para as rotas -->
+          <Link to="/contact">Contact</Link>
+        </nav>
+    )
+}
