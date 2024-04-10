@@ -1,0 +1,54 @@
+                               <!-- Configurar routers  -->
+                  Configurar Browser router dentro do ARQUIVO routers.jsx em uma PASTA routers >
+                  
+import App from '../App.jsx'
+import Home from "../pages/Home.jsx"
+import About from "../pages/About.jsx"                     <!-- importar as rotas -->
+import Contact from "../pages/Contact.jsx"
+import Error from '../pages/Error.jsx'                  
+import { createBrowserRouter } from 'react-router-dom'     <!-- importar o router  -->           
+                                 
+const routers = createBrowserRouter([                      <!-- criar o router  -->
+{
+path: "/",                                                 <!-- criar a primeira rota -->
+element: <App/>,                                           <!-- Selecionar o componente que será o <OUTLET /> -->
+errorElement: <Error/>,                                    <!-- criar página de erro na pasta pages -->
+children: [                                                <!-- criar as rotas filhas dentro do array -->
+{
+path: "/",
+element: <Home/>
+ },
+{
+path: "/about",
+element: <About/>
+ }
+{
+path: "/contact",
+element: <Contact/>
+}
+]
+}
+])
+
+export default routers                                      <!-- exportar o router  -->
+
+
+
+                 <!-- Configurar <OUTLET /> dentro do componente definido anteriormente -->
+
+import './App.css'                                        <!-- importar o CSS caso exista -->
+import { Outlet } from 'react-router-dom'                  <!-- importar o <OUTLET />  -->
+import Navbar from './components/Navbar.jsx'               <!-- importar o componente Navbar  -->
+import Footer from './components/Footer.jsx'               <!-- importar o componente Footer  -->
+
+function App() {
+  return (
+    <div className="App">
+     <Navbar />               <!-- Componente armazenado na pasta de componentes -->
+     <Outlet />               <!-- Elemento pai que carrega o array de rotas definido no primeiro path --> 
+     <Footer />               <!-- Componente armazenado na pasta de componentes -->
+    </div>                    
+  );
+}
+
+export default App

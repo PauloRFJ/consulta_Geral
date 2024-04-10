@@ -1,0 +1,85 @@
+
+    1- Criar uma pasta dentro do SRC chamada Context com o ou os arquivos de contexto. Ex: UsuariosContext.jsx
+
+
+
+import { createContext, useState } from 'react'                     <!-- importar o createContext -->
+
+export const UsuariosContext = createContext() 
+                                                          <!-- NÃO usar o DEFAULT pois serão exportados dois contextos -->
+export const UsuariosContextProvider = ({children}) => {  <!-- definir o contexto e definir o children -->
+
+    const [usuarios, setUsuarios] = useState([             <!-- definir o estado -->
+    {
+        nome: "João",
+        email: "joao@example.com"
+    },
+    {
+        nome: "Maria",
+        email: "maria@example.com"                         <!-- Objetos do array -->
+    },
+    {
+        nome: "Pedro",
+        email: "pedro@example.com"
+    }
+    ])
+    }
+
+    function getLista() {                <!-- SOMENTE UM EXEMPLO DE UMA FUNÇÃO PARA USO DE DADOS DE UMA API -->
+        dados do useFetch de uma API     <!-- possibilidade para uso do useFetch de uma API -->
+    }
+
+    return (
+        <UsuariosContext.Provider value={{usuarios, setUsuarios, getLista}}>   <!-- getLista apenas no caso de uma API -->
+            {children}
+        </UsuariosContext>
+    )
+}
+
+
+
+                            2- Importar o contexto dentro do arquivo App.jsx
+ 
+
+
+import { useContext } from 'react'                                       <!-- importar o useContext -->
+import { UsuariosContextProvider } from './Context/UsuariosContext.jsx'  <!-- importar o contexto -->
+import Navbar from './Components/Navbar.jsx'                             <!-- importar Páginas -->
+import Footer from './Components/Footer.jsx'
+import { Outlet } from 'react-router-dom'                                <!-- importar o <OUTLET /> -->
+
+function App() {
+  return (
+    <UsuariosContextProvider>                       <!-- importar o contexto que ficará dentro do Fragment -->
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </UsuariosContext.Provider>
+  );
+}
+
+export default App
+
+
+
+
+                    3- Usar o useContext dentro da página que você quiser.  EX: Home.jsx
+
+
+
+import { useContext } from 'react'                                       <!-- importar o useContext -->
+import { UsuariosContext } from './Context/UsuariosContext.jsx'          <!-- importar a variável do contexto -->
+
+function Home() {
+  const { usuarios, setUsuarios } = useContext(UsuariosContext)          <!-- usar a variável do contexto -->
+  return (
+    <>
+      <h1>Home</h1>
+      {usuarios.map((usuario, index) => (                                <!-- percorrer o array -->
+        <h3 key={index}>{usuario.nome}</h3>                              <!-- mostrar o nome do array -->
+      ))}
+    </>
+  );
+}
+
+export default Home
