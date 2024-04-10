@@ -1,0 +1,64 @@
+                     O useReducer é similar ao useState, porém a grande diferença 
+                     está no fato que podemos passar uma funçãopara alterar o estado.
+
+Na sua declaração ele recebe 3 parâmetros:
+              reducer - função redutora que especifica como o estado deve ser atualizado;
+              initialArg - o valor a partir do qual o estado inicial é calculado (state);
+              init (opcional) - função redutora que deve retornar o estado inicial;
+
+
+               <!-- Exemplo de uso: useReducer para somar, diminuir e multiplicar -->
+            
+                 1- Exemplo dentro de uma variável Provider dentro de um arquivo Context.jsx
+
+import { useReducer } from "react";                                <!-- importar o useReducer -->
+
+function UseContextProvider() {
+    const [count, dispatchCount] = useReducer(reducer, 0)   <!-- [QualquerNome, dispatchQualquerNome] = useReducer(reducer, STATE) -->
+
+    function reducer(state, action) {                              <!-- criar a função redutora -->
+        switch (action.type) {
+            case "ADD":
+                return state + 1;
+            case "REMOVE":
+                return state - 1;
+            case "MULTIPLY":
+                return state * 2;
+        }
+    }
+}
+
+return (
+    <UsuariosContext.Provider value={{count, dispatchCount}}/>  <!-- add parametros ao provider -->
+      {children}
+    <UsuariosContext.Provider/>
+)
+}
+export default UseReducerComponent;
+
+
+
+                 2- Importar dados para a página que você quiser. EX: Cadastro.jsx
+
+import { useContext } from 'react'                                <!-- importar o useContext -->
+import { UsuariosContext } from '../Context/UsuariosContext.jsx'  <!-- importar o contexto -->
+
+
+function Cadastro() {
+
+    const { count, dispatchCount } = useContext(UsuariosContext)  <!-- receber variavel e usar o contexto do provider -->
+
+    return (
+        <>
+            <h1>Página de CADASTRO</h1>
+            <h3>Contador: {count}</h3>
+<!--        <button onClick={() => dispatchCount({type: "ADD"})}>Somar</button>             PARTE COMENTADA
+            <button onClick={() => dispatchCount({type: "REMOVE"})}>Diminuir</button>          PARA NÃO
+            <button onClick={() => dispatchCount({type: "MULTIPLY"})}>Dobrar</button>          GERAR ERRO   -->   
+        </>
+    )
+}
+
+
+
+export default Cadastro
