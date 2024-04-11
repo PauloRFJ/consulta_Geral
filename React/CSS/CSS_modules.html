@@ -1,0 +1,19 @@
+
+                Para usar CSS Modules em um projeto React, precisamos seguir os seguintes passos:
+
+1- Crie um arquivo CSS e nomeie-o com a extensão .module.css
+
+    Home.module.css                               
+
+2- Importe o arquivo CSS em seu componente:
+
+     
+    import styles from './Home.module.css';        <!-- importar o arquivo CSS -->
+
+
+
+3- Aplique as classes CSS definidas no arquivo .module.css ao seu JSX usando a sintaxe:
+
+    <div className={styles.classeExemplo}>         <!-- Utilize a forma CamelCase sem caracteres especiais para nomear as classes -->
+        EXEMPLO
+    </div>
