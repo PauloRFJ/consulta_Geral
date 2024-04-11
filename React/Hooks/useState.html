@@ -1,0 +1,43 @@
+                        Exemplo de uso: useState para alterar o estado
+ 
+               1- importar o useState dentro do arquivo que será usado
+
+       EXEMPLO 1
+
+import { useState } from 'react'   <!-- importar o useState -->
+
+function App() {
+    const [count, setCount] = useState(0)   <!-- [QualquerNome, setQualquerNome] = useState(valor inicial) -->
+
+    const increment = () => {                <!-- Função que altera o estado -->
+        setCount((count) => count + 1)       <!-- valor do novo estado com base no valor anterior, forma correta -->
+    };
+
+    return (
+        <>
+            <h1>Contador: {count}</h1>                         <!-- mostrar o valor do estado renderizado a cada clique -->                  
+            <button onClick={increment}>Incrementar</button>   <!-- botão para alterar o estado -->
+        </>
+    );
+};
+
+
+export default App;
+
+
+         EXEMPLO 2
+
+import { useState } from 'react'   <!-- importar o useState -->
+
+function App() {
+    const [valorAleatorio, setValorAleatorio] = useState()   <!-- [QualquerNome, setQualquerNome] = useState(estado inicial) -->
+
+    return (
+        <>
+<!--        <button onClick={() => setValorAleatorio(Math.random())}>Gerar novo valor</button>     COMENTADO PARA NÃO GERAR ERRO -->
+            <p>{valorAleatorio}</p>      <!-- mostrar o valor do estado renderizado -->
+        </>
+    );
+};
+
+export default App
