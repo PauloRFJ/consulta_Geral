@@ -1,0 +1,88 @@
+Controled Components permitem que o React controle o comportamento do componente com base nos dados que recebe. 
+Para criar um componente controlado, é necessário definir um estado inicial, atualizá-lo 
+conforme necessário e garantir que as alterações no estado sejam refletidas na interface do usuário.                            
+                              
+                              
+                              
+                              Exemplo de uso: Controled Components
+
+
+
+dentro de um arquivo de página JSX utilizando o Material UI...    Ex: Cadastro.jsx    >
+
+
+
+
+import { useState, useContext } from 'react'                <!-- importar o useState e o useContext -->
+import { UsersContext } from '../Context/UsersContext.jsx'  <!-- importar o contexto -->
+import { TextField, Button } from '@mui/material'           <!-- importar o Material UI -->
+import styles from './Cadastro.module.css'                  <!-- importar o CSS -->
+
+
+function Cadastro() {                               <!-- Criar o componente de Cadastro -->
+    const [users, setUsers] = useState({            <!-- Usando o useState para setar as props do fomulário -->
+        name: '',
+        email: ''
+    })
+
+    const {users, setUsers} = useContext(UsersContext)         <!-- criar a variável do contexto -->
+
+    function Cadastrar() {                                     <!-- Função para Cadastrar -->
+        setUsers([...users, users])                            <!-- ...users = spread operator (engloba todos as props do objetos) -->
+    }
+
+    return (
+        <>
+           <div className={styles.container}>
+              <h1>Cadastrar usuário</h1>
+           </div>
+           <TextField
+              id="outlined-basic"                                     
+              label="Nome"
+              variant="outlined"
+              value={users.name}
+              onChange={(event) => setUsers({...users, name: event.target.value})}   <!--  ...users = spread operator (engloba todos as props do objetos) -->
+           />
+           <TextField
+              id="outlined-basic"
+              label="E-mail"
+              variant="outlined"
+              value={users.email}
+              onChange={(event) => setUsers({...users, email: event.target.value})}
+           />
+           <Button variant="contained" color="success" onClick={() => console.log(users)}>Cadastrar</Button>
+        </>
+    );
+}
+
+
+export default Cadastro
+
+
+
+
+
+dentro de um arquivo de página JSX para mostar os novos dados cadastrados no formulário...  Ex: Lista.jsx  >
+
+
+import { useContext } from 'react'                                <!-- importar o useContext -->
+import { UsersContext } from '../Context/UsersContext.jsx'        <!-- importar o contexto -->
+
+function Lista() {
+    const { users } = useContext(UsersContext)                    <!-- criar a variável do contexto -->
+
+    return (
+        <>
+            <ul>
+                {users.map((user) => (                             <!-- percorrer o array -->
+                    <li key={user.id}>                             <!--definir uma chave -->
+                        {user.name} - {user.email}                 <!-- mostrar os dados do contexto -->
+                    </li>
+                ))}
+            </ul>
+        </>
+    )
+
+}
+
+export default Lista
