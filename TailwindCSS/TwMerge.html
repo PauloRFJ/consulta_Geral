@@ -1,0 +1,35 @@
+                            Instalando o Tailwind Merge
+
+    1- Sobre o Tailwind Merge >
+
+    https://github.com/dcastil/tailwind-merge/blob/v2.2.2/docs/when-and-how-to-use-it.md
+
+
+
+    2- No terminal > 
+       
+          npm i tailwind-merge
+
+
+    3- Exemplo de uso >
+
+
+import { ComponentProps } from "react"                          <!-- importar o ComponentProps -->    
+import { twMerge } from "tailwind-merge"                        <!-- importar o twMerge -->
+
+interface IconButtonProps extends ComponentProps<'button'> {    <!-- definir o ComponentProps -->
+    transparent?: boolean                                       <!-- definir a propriedade, o ? significa opcional -->
+}
+
+
+export function IconButton({ transparent, ...props }: IconButtonProps) {
+    return (
+      <button {...props} className={twMerge                     <!-- chamar o twMerge dentro de chaves -->
+        (
+          'border border-white/10 rounded-md p-1.5',            <!-- definir as classes entre parenteses -->
+          transparent ? 'bg-black/20' : 'bg-white/10',
+          props.disabled ? 'opacity-50 cursor-not-allowed' : null,
+        )}     
+      />
+    )
+}

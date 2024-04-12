@@ -1,0 +1,55 @@
+                                Instalando o Tailwind Variants
+
+    1- Sobre o Tailwind Merge >
+
+             https://github.com/dcastil/tailwind-merge/blob/v2.2.2/docs/when-and-how-to-use-it.md
+
+
+
+    2- No terminal > 
+   
+          npm i tailwind-variants
+
+
+    3- Exemplo de uso >
+
+
+    import { tv } from 'tailwind-variants';                      <!-- importar o tailwind-variants -->
+ 
+    const button = tv({                                          <!-- criar a variante -->
+      base: 'font-medium bg-blue-500 text-white rounded-full active:opacity-80',   <!-- definir as propriedades base -->
+      variants: {                                                <!-- definir as propriedades varianteas -->
+        color: {
+          primary: 'bg-blue-500 text-white',
+          secondary: 'bg-purple-500 text-white'
+        },
+        size: {
+          sm: 'text-sm',
+          md: 'text-base',
+          lg: 'px-4 py-3 text-lg'
+        }
+      },
+      compoundVariants: [                                       <!-- definir as propriedades composta, OPCIONAL-->
+        {
+          size: ['sm', 'md'],
+          class: 'px-3 py-1'
+        }
+      ],
+      defaultVariants: {                                         <!-- definir as propriedades padrão -->
+        size: 'md',
+        color: 'primary'
+      }
+    });
+
+    interface ButtonProps extends ComponentProps<'button'> & VariantProps<typeof button>  <!-- definir o ComponentProps -->
+        
+
+    export function Button({ size, color, className, ...props }: ButtonProps) {        <!-- definir função com Props geral e variantes --> 
+     
+    return (
+      <button className={button({ size: 'sm', color: 'secondary', className })}>        <!-- chamar a variante -->
+        Click me
+      </button>
+    );
+
+    }
