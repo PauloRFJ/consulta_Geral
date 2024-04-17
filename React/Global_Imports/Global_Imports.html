@@ -1,0 +1,46 @@
+                   Como importar arquivos globalmente no projeto React?
+
+
+1- Importar arquivos globais dentro do arquivo index.jsx >
+
+ex: Pasta Pages
+
+dentro da pasta 'src/pages', criar as páginas com os nomes adequados e importar dentro do arquivo index.jsx
+
+pages > Home.jsx
+        About.jsx
+        Contact.jsx
+        SignIn.jsx
+        ErrorPage.jsx
+        index.jsx
+
+dentro do arquivo index.jsx >
+
+export * from './Home';
+export * from './About';
+export * from './Contact';
+export * from './SignIn';
+export * from './ErrorPage';
+
+
+dentro do arquivo que vai utilizar as páginas >
+
+ex: Pasta src/routes/index.jsx
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Home, About, Contact, SignIn } from 'pages';
+
+export function AppRoutes() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Router>
+  );
+}
+

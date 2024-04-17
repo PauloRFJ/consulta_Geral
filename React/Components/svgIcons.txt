@@ -1,0 +1,44 @@
+                     Criando ícones SVG
+
+Ex: menu estilo hambuguer
+
+1- dentro da pasta public, criar o arquivo que vai utilizar (ex: Hamburger.svg)
+
+<svg width="25" height="17" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="25" height="3" fill="#333333"/>
+    <rect y="7" width="25" height="3" fill="#333333"/>
+    <rect y="14" width="25" height="3" fill="#333333"/>
+</svg>
+
+
+2- dentro da pasta src/Components/Icons, criar o arquivo que vai utilizar (ex: HamburgerIcon.jsx)
+
+export function HamburgerIcon({ 
+    width = 25, 
+    height = 17, 
+    fill = '#333333' }) {
+        
+  return (
+    <div style={{ width, height }}>
+        <svg 
+           style={{ width = 'inherit', height = 'inherit'}}
+           viewBox="0 0 25 17" 
+           fill="none" 
+           xmlns="http://www.w3.org/2000/svg"
+           >
+            <rect width="25" height="3" fill={fill}/>
+            <rect y="7" width="25" height="3" fill={fill}/>
+            <rect y="14" width="25" height="3" fill={fill}/>
+        </svg>
+    </div>
+  );
+}
+
+
+3- Criar um arquivo index.jsx dentro da pasta src/Components/Icons para export absoluto
+
+export * from './HamburgerIcon';
+
+4- Export absoluto da pasta Icons no arquivo index.jsx da pasta Components, caso ela tenha sido recém criada.
+
+export * from './Icons'
