@@ -1,0 +1,81 @@
+Conjunto de dados que compartilham o estado entre componentes. 
+Contextos permitem que os dados de um componente sejam acessados por outros componentes.
+
+Tipos de contextos:
+-Tema de cores
+-Local de idioma
+-Local de armazenamento
+-Autenticação
+-Preferências de exibição
+
+Elementos:
+
+-Contexto (Context) : Conjunto de dados que compartilham o estado entre componentes.
+-Provider (Provider) : Envolve os componentes que querem acessar o contexto.
+-Consumidor (Consumer) : Elemento que recebe o contexto.
+
+Passo a passo:
+
+1. Criar um contexto
+2. Criação do Provider
+3. Envolver o componente que quer acessar o contexto com o Provider
+4. Criação do Consumidor
+
+
+Ex:  Carrinho de compras
+
+1- Criar dentro da pastas Contexts o arquivo products.jsx
+
+2- Criar dentro do arquivo products.jsx o contexto
+
+
+import { createContext } from 'react'                                    <!-- importar o createContext -->
+
+export const ProductsContext = createContext()                           <!-- criar o contexto NomeDoArquivoContext --> 
+
+function ProductsContextProvider({children}) {                           <!-- criar o Provider -->
+    const [cartItems, setCartItems] = useState([]);                      <!-- criar o estado -->
+
+    function addToCart(item) {                                           <!-- criar a função do Consumidor -->
+        setCartItems((cartItems) => [...cartItems, item] )               <!-- adicionar o item ao carrinho -->
+    }
+
+    function cleanCart(item) {                                           <!-- criar a função do Consumidor -->
+        setCartItems([])                                                 <!-- limpar o carrinho -->
+    }
+
+    return (
+        <ProductsContext.Provider value={{cartItems, addToCart}}>        <!-- criar o Consumidor com o valor do estado e a função -->
+            {children}                                                   <!-- envolver o componente com o Provider -->
+        </ProductsContext.Provider>
+    )
+}
+
+export default ProductsContextProvider
+
+
+
+3- Dentro da página que você quiser, usar o Provider
+
+
+import { useContext } from 'react'                                       <!-- importar o useContext -->
+
+function Home() {
+    const { cartItems, addToCart } = useContext(ProductsContext)          <!-- usar o Consumidor com o valor do estado e a função -->
+    
+    return (
+        <div>
+            <h1>Home</h1>
+            <ul>
+                {cartItems.map((item) => (
+                    <li key={item.id}>
+                        {item.name} - {item.price}
+                    </li>
+                ))}
+            </ul>
+            <button onClick={addToCart}>Adicionar ao carrinho</button>
+        </div>
+    )
+}
+
+export default Home

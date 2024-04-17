@@ -1,0 +1,58 @@
+                    Criar hook customizado useFetch
+
+1- Criar o arquivo useFetch.jsx dentro da pasta Hooks
+
+2- Criar a funcionalidade dentro do arquivo useFetch.jsx
+
+
+import { useState, useEffect } from 'react'          <!-- importar o useState e o useEffect -->
+
+function useFetch(url) {                             <!-- Criar a funcionalidade -->
+
+    const [dados, setDados] = useState([])           <!-- Criar o estado -->
+
+  useEffect(() => {                                  <!-- Criar o useEffect -->
+    fetch(url)                                       <!-- importar a API -->
+    .then((response) => response.json())             <!-- tratar o retorno da API (converter para JSON) -->
+    .then((data) => setDados(data))                  <!-- tratar o retorno da API (ler os dados) -->    
+    .catch((error) => console.log(error))
+}, [url])                                            <!-- Só chamar a função quando o url mudar -->
+
+return dados
+}
+
+export default useFetch
+
+
+
+
+3- Usar a funcionalidade dentro da página que você quiser.  EX: App.jsx
+
+
+
+import { useFetch } from './Hooks/useFetch.jsx'          <!-- importar a funcionalidade -->
+
+function App() {
+
+    const dados = useFetch("/dados/dados.json")           <!-- criar variável e chamar a funcionalidade -->
+    const [trilhas, setTrilhas] = useState([])            <!-- Criar o estado -->
+
+    useEffect(() => {                                     <!-- Criar o useEffect -->
+        if(!!dados) {                                     <!-- se existir dados -->
+            setTrilhas(dados.trilhas)                     <!-- setar o estado -->
+        }
+    }, [dados])                                           <!-- só chamar a função quando o dados mudar -->
+} 
+
+return (
+    <>
+        <Navbar />
+        <div>
+            <h1>Trilhas</h1>
+        </div>
+         {!!trilhas && trilhas.map((trilha, index) => (           <!-- percorrer o array -->
+            <CardTrilha dadosTrilha={trilha} key={index} />       <!-- chamar a funcionalidade OBS: usar props.dadosTrilha.titulo por exemplo -->
+         ))}
+        <Footer />
+    </>
+)

@@ -1,0 +1,36 @@
+import { useState } from 'react';
+
+function UseCounter() {
+    const [count, setCount] = useState(0)   <!-- [QualquerNome, dispatchQualquerNome] = useState(STATE Inicial) -->
+
+    const increment = () => {                <!-- Função que altera o estado -->
+        setCount((count) => count + 1)       <!-- valor do novo estado com base no valor anterior, forma correta -->
+    };
+
+    return [count, increment];               <!-- retornar o valor e a função -->
+}
+
+
+
+na página que for usada >
+
+Ex: loja de frutas para adicionar itens ao carrinho
+
+import { UseCounter } from './Hooks/useCounter'
+
+const [apple, add1] = UseCounter()              <!-- no caso, count e increment pode ser trocado por qualquer coisa mais de uma vez -->
+const [banana, add1] = UseCounter()
+const [orange, add1] = UseCounter()
+
+return (
+    <>
+        <h1>Maçãs: {apple} Unidades</h1>
+        <button onClick={add1}>Adicionar</button>
+
+        <h1>Bananas: {banana} Unidades</h1>
+        <button onClick={add1}>Adicionar</button>
+
+        <h1>Laranjas: {orange} Unidades</h1>
+        <button onClick={add1}>Adicionar</button>
+    </>
+)
