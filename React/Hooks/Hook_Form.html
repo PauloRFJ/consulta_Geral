@@ -1,0 +1,50 @@
+                           React Hook Form
+
+1- intalizar o react hook form
+     
+     npm install react-hook-form
+
+
+2- importar o hook
+
+
+import { useForm } from 'react-hook-form'
+
+
+function CadastrarProduto() {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+
+    function onSubmit(formValue) {
+        console.log(formValue)
+      }
+
+    return (
+       <div> 
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="nome">Nome</label>
+            <input type="text" {...register('nome', {
+                required: "Por favor, digite o nome",
+                maxLength: {
+                    value: 20,
+                    message: "O nome deve ter no maximo 10 caracteres"
+                }
+            })}
+            />
+
+            {errors.nome && <p>{errors.nome.message}</p>}
+
+            <label htmlFor="price">Preço</label>
+            <input type="text" {...register('price', { 
+                required: "Por favor, digite o preço"
+            })}
+             />
+
+             {errors.nome && <p>{errors.nome.message}</p>}
+
+            <button type="submit">Cadastrar</button>
+        </form>
+       </div>
+    );
+}
